@@ -46,9 +46,8 @@ qad() {
     echo "Press q to stop"
     ffmpeg -loglevel error -use_wallclock_as_timestamps 1 -f alsa -i hw:1 "$newfilename"
 
-    ffplay -loglevel error "$newfilename" &
+    vlc "$newfilename"
     if dialog --yesno "Commit changes to this file?" 0 0; then
         git add "$newfilename" && ecom
     fi
-    kill -INT $!
 }

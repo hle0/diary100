@@ -4,9 +4,9 @@ A simple command-line diary application. Designed to be quick and easy to use (a
 
 ## Requirements
 
-Requires `dialog`, `git`, `bash` and `coreutils`; it also requires `ffmpeg` and `alsa` if you want to record audio entry.
+Requires `dialog`, `git`, `bash` and `coreutils`; it also requires `ffmpeg`, `alsa` and `vlc` if you want to record audio entry.
 
-On Desktop Ubuntu, all of these should be installed by default, except `ffmpeg`, `dialog` and `git`, I think.
+On Desktop Ubuntu, all of these should be installed by default, except `dialog`, `git`, `ffmpeg`, and `vlc`, I think.
 
 ## Usage
 
