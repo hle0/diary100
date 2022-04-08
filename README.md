@@ -12,13 +12,16 @@ On Desktop Ubuntu, all of these should be installed by default, except `ffmpeg`,
 
 Create an empty git repository, and add this repo as a submodule. A recommended name for the submodule is `scripts`.
 
-Next, when you want to use the diary, source the base.sh file (`. ./scripts/base.sh`). You can then use the various commands (TODO: document here).
+If you want to add audio, make an `audio/` subdirectory.
+
+Next, when you want to use the diary, source the base.sh file (`. ./scripts/base.sh`).
 
 Overall:
 
 ```sh
 mkdir my-diary
 cd my-diary
+mkdir audio
 git init
 git submodule add https://github.com/hle0/diary100.git scripts
 git commit -m "Initial commit (add submodule)"
@@ -32,6 +35,23 @@ Then, when you want to use commands:
 ```sh
 . ./scripts/base.sh
 ```
+
+After sourcing, you can then use the various commands:
+
+| Command | Description |
+|---------|-------------|
+| `ecom`  | **Com**mit any **e**xisting staged changes. Fails if there are no staged changes. |
+| `qcom`  | **Q**uickly **com**mit all unstaged changes. Fails if there are already staged changes. |
+| `qed`   | **Q**uickly **ed**it (in `nano`) and commit some changes in a file. Prompts for confirmation. |
+| `qad`   | **Q**uickly record and commit some **a**u**d**io. Prompts for confirmation, and plays it back afterwards. Press q to stop recording. |
+
+There are also a few internal commands that you probably won't ever use:
+
+| Command   | Description |
+|-----------|-------------|
+| `chkdiff` | Returns 1 if there are unstaged changes to the git repo. 0 otherwise. |
+| `com-sig` | Generate an informative commit signature about where and when a commit was performed. |
+
 
 ## License
 
