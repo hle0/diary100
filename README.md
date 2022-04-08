@@ -43,7 +43,7 @@ After sourcing, you can then use the various commands:
 | `ecom`  | **Com**mit any **e**xisting staged changes. Fails if there are no staged changes. |
 | `qcom`  | **Q**uickly **com**mit all unstaged changes. Fails if there are already staged changes. |
 | `qed`   | **Q**uickly **ed**it (in `nano`) and commit some changes in a file. Prompts for confirmation. |
-| `qad`   | **Q**uickly record and commit some **a**u**d**io. Prompts for confirmation, and plays it back afterwards. Press q to stop recording. |
+| `qad`   | **Q**uickly record and commit some **a**u**d**io. Plays it back and prompts for confirmation. Press q to stop recording. |
 
 There are also a few internal commands that you probably won't ever use:
 
