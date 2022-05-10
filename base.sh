@@ -42,12 +42,16 @@ qed() {
 
 # quick audio
 qad() {
-    newfilename="audio/$(date +%s)-$1.mp3"
-    echo "Press q to stop"
-    ffmpeg -loglevel error -use_wallclock_as_timestamps 1 -f alsa -i hw:1 "$newfilename"
+    newfilename="audio/$(date +%s)-$1.ogg"
+    echo "Press Ctrl-C to stop"
+    arecord -c 2 -r 96000 "$newfilename.tmp"
+    ffmpeg -loglevel error -f wav -i "$newfilename.tmp" -af loudnorm "$newfilename"
+    rm "$newfilename.tmp"
 
-    vlc "$newfilename"
+    vlc "file:///$(pwd)/$newfilename"
     if dialog --yesno "Commit changes to this file?" 0 0; then
         git add "$newfilename" && ecom
+    else
+	rm "$newfilename"
     fi
 }
