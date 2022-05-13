@@ -1,5 +1,19 @@
 #!/bin/bash
 
+maybesource() {
+    if [ -f "$1" ]; then
+        echo "sourcing $1..."
+        source "$1"
+    elif [ -d "$1" ]; then
+        for i in $(ls "$1"); do
+            maybesource "$1/$i"
+        done
+    fi
+}
+
+maybesource "$(pwd)/.diary100rc"
+maybesource "~/.diary100rc"
+
 com-sig() {
     echo "$(whoami)@$(hostname): $(date)"
 }
