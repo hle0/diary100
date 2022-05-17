@@ -1,0 +1,4 @@
+# a sample .diary100rc for doing quick voice training sessions (for singing or transvoice)
+vt() {
+    qad "voice training session"
+}
