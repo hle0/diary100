@@ -56,7 +56,7 @@ qed() {
 
 # quick audio
 qad() {
-    newfilename="audio/$(date +%s)-$1.ogg"
+    newfilename="audio/$(date -u +%F_%H_%M_%S)-$1.ogg"
     echo "Press Ctrl-C to stop"
     arecord -c 2 -r 96000 "$newfilename.tmp"
     ffmpeg -loglevel error -f wav -i "$newfilename.tmp" -af loudnorm "$newfilename"
