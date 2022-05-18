@@ -1,5 +1,10 @@
 #!/bin/bash
 
+fn_exists() {
+    test "$(type -t "$1")" = 'function'
+    return $?
+}
+
 maybesource() {
     if [ -f "$1" ]; then
         echo "sourcing $1..."
@@ -11,10 +16,12 @@ maybesource() {
     fi
 }
 
+audio_ext='ogg'
+
 maybesource "$(pwd)/.diary100rc"
 maybesource "~/.diary100rc"
 
-com-sig() {
+fn_exists com-sig || com-sig() {
     echo "$(whoami)@$(hostname): $(date)"
 }
 
@@ -54,9 +61,13 @@ qed() {
     fi
 }
 
+fn_exists audio_filename || audio_filename() {
+    echo "audio/$(date -u +%F_%H_%M_%S)-$1.${audio_ext}"
+}
+
 # quick audio
 qad() {
-    newfilename="audio/$(date -u +%F_%H_%M_%S)-$1.ogg"
+    newfilename="$(audio_filename "$1")"
     echo "Press Ctrl-C to stop"
     arecord -c 2 -r 96000 "$newfilename.tmp"
     ffmpeg -loglevel error -f wav -i "$newfilename.tmp" -af loudnorm "$newfilename"
