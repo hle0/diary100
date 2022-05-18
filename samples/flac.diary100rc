@@ -1,0 +1,2 @@
+# a diary100rc to use flac instead of ogg as audio diary format
+audio_ext='flac'
