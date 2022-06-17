@@ -1,0 +1,39 @@
+replay() {
+	beep && \
+	qplay "$1" && \
+	beep && \
+	qplay "$2"
+}
+
+mimic() {
+	beep
+	qplay "$1" || return $?
+	old_1="$1"
+	shift
+	afn="$(audio_filename "$1 - mimic $(basename "$old_1")")"
+	sleep 1
+	beep
+
+	qrec "$afn"
+	replay "$old_1" "$afn"
+
+	maybe_add "$afn"
+}
+
+dimic() {
+	beep
+	sleep 0.5
+
+	old_1="$1"
+	shift
+	afn="$(audio_filename "$1 - $(basename "$old_1")")"
+	qplay "$old_1" &
+	tmp1=$!
+	qrec "$afn" || return $?
+
+	kill -SIGINT "$tmp1" && wait
+
+	replay "$old_1" "$afn"
+
+	maybe_add "$afn"
+}
